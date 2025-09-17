@@ -6,8 +6,18 @@ const cors = require('cors');
 const app = express(); 
 const PORT = process.env.PORT || 3000; 
  
-app.use(cors()); 
-app.use(express.json()); 
+app.use(cors());
+app.use(express.json());
+
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'ASAP Ticketing Backend is running!',
+    environment: 'LIVE',
+    timestamp: new Date().toISOString()
+  });
+});
  
 app.post('/api/create-payment-intent', async (req, res) => { 
   try { 
